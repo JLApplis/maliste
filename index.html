@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Courses</title>
+<title>Maliste</title>
 <meta name="theme-color" content="#2E7D4F">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -191,7 +191,7 @@ li.insertion { border-bottom: 2px dashed #CFE5D3; background: #FAFDF9; }
 <form class="connexion" id="ecran-connexion" hidden autocomplete="on">
   <div class="haut">
     <div class="fruits" aria-hidden="true">🥕🍅🥖🍋🧀</div>
-    <h1>Courses</h1>
+    <h1>Maliste</h1>
     <div class="sous">Ta liste, sur le téléphone et le PC</div>
   </div>
   <div class="corps">
@@ -206,7 +206,7 @@ li.insertion { border-bottom: 2px dashed #CFE5D3; background: #FAFDF9; }
 <div id="app" hidden>
 <div id="voile" hidden></div>
 <nav id="tiroir" aria-label="Menu" hidden>
-  <div class="tiroir-tete"><span class="tiroir-titre">Courses</span><button class="fermer-tiroir" id="fermer-tiroir" type="button" aria-label="Fermer le menu">×</button></div>
+  <div class="tiroir-tete"><span class="tiroir-titre">Maliste</span><button class="fermer-tiroir" id="fermer-tiroir" type="button" aria-label="Fermer le menu">×</button></div>
   <div class="tiroir-label">Listes</div>
   <div id="tiroir-listes"></div>
   <button class="tiroir-item ajout-item" id="nouvelle-liste" type="button"><span class="ic">＋</span>Nouvelle liste</button>
@@ -216,14 +216,14 @@ li.insertion { border-bottom: 2px dashed #CFE5D3; background: #FAFDF9; }
   <div class="tiroir-sep"></div>
   <button class="tiroir-item" id="aller-archives" type="button"><span class="ic">🗄️</span>Archives<span class="compte" id="nb-archives"></span></button>
   <button class="tiroir-item" id="aller-sauvegarde" type="button"><span class="ic">💾</span>Sauvegarde</button>
-  <div class="tiroir-pied">Courses <span id="version"></span> — JLApplis<br><button class="deco" id="deco" type="button">Se déconnecter</button>
+  <div class="tiroir-pied">Maliste <span id="version"></span> — JLApplis<br><button class="deco" id="deco" type="button">Se déconnecter</button>
     <div class="deco-confirme" id="deco-confirme" hidden><span>Se déconnecter ? Pour te reconnecter, il faudra du réseau.</span><span class="deco-btns"><button class="non" id="deco-non" type="button">Annuler</button><button class="oui" id="deco-oui" type="button">Se déconnecter</button></span></div></div>
 </nav>
 
 <div class="page">
   <header>
     <button class="btn-menu" id="btn-menu" type="button" aria-label="Ouvrir le menu">☰</button>
-    <h1 id="titre-vue">Courses</h1>
+    <h1 id="titre-vue">Maliste</h1>
     <span class="etat" id="etat">Chargement…</span>
     <button class="btn-menu btn-sauv" id="btn-sauv" type="button" title="Sauvegarder" aria-label="Sauvegarder">💾<span class="pastille" id="pastille-sauv" hidden></span></button>
     <button class="btn-menu" id="btn-actions" type="button" aria-label="Renommer ou archiver" hidden>⋮</button>
@@ -289,7 +289,7 @@ li.insertion { border-bottom: 2px dashed #CFE5D3; background: #FAFDF9; }
       <p class="note" id="fs-aide"></p>
     </div>
     <div class="bloc-s"><h3>↩️ Restaurer</h3>
-      <p class="note">Remplace <b>toutes</b> les données actuelles par celles d'un fichier de sauvegarde COURSES. Juste avant, l'état actuel est sauvegardé automatiquement (fichier « COURSES_avant_restauration_… »). Il faut du réseau.</p>
+      <p class="note">Remplace <b>toutes</b> les données actuelles par celles d'un fichier de sauvegarde Maliste (ou une ancienne sauvegarde COURSES). Juste avant, l'état actuel est sauvegardé automatiquement (fichier « MALISTE_avant_restauration_… »). Il faut du réseau.</p>
       <div class="btns"><button class="lien" id="rest-choisir" type="button">📂 Choisir une sauvegarde…</button></div>
       <div class="confirme" id="rest-confirme" hidden><span id="rest-txt"></span><button class="non" id="rest-non" type="button">Annuler</button><button class="oui" id="rest-oui" type="button">Tout remplacer</button></div>
       <input type="file" id="file-json" accept=".json,application/json" hidden>
@@ -307,14 +307,14 @@ li.insertion { border-bottom: 2px dashed #CFE5D3; background: #FAFDF9; }
 <div class="toast" id="toast" role="status" hidden></div>
 <script type="module">
 /*
-    Courses — liste de courses (JLApplis)
+    Maliste — liste de courses (JLApplis), anciennement « Courses »
     Copyright (C) 2026 Jluc — JLApplis — Licence GPL v3 (voir LICENSE)
 */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 import { initializeFirestore, persistentLocalCache, collection, doc, addDoc as fbAddDoc, updateDoc as fbUpdateDoc, deleteDoc as fbDeleteDoc, setDoc as fbSetDoc, onSnapshot, getDocs, getDocsFromCache, getDoc, writeBatch, increment } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-const VERSION = "1.18";
+const VERSION = "1.19";
 
 /* chaque écriture compte comme une modification non sauvegardée (sur cet appareil) */
 /* compteur de modifications non sauvegardées, PARTAGÉ entre appareils (Firestore : users/{uid}/meta/sauvegarde) :
@@ -935,7 +935,7 @@ async function lireTout() {
     }
     groupes.push(o);
   }
-  return { application: "COURSES", format: 1, version: VERSION, exporteLe: new Date().toISOString(), groupes };
+  return { application: "MALISTE", format: 1, version: VERSION, exporteLe: new Date().toISOString(), groupes };
 }
 function compter(o) {
   const l = o.groupes.filter((g) => g.data.type !== "note"), n = o.groupes.filter((g) => g.data.type === "note");
@@ -960,14 +960,14 @@ function rendreSauvegarde() {
   const m = nbModifs();
   $("sauv-derniere").textContent = (d ? new Date(d).toLocaleString("fr-FR") : "jamais") + (m ? " — " + pl(m, "modification") + " depuis" : "");
   $("fs-choisir").hidden = !fsDispo();
-  $("fs-aide").textContent = fsDispo() ? "Choisis une fois le dossier (par exemple « COURSES JSON ») : chaque sauvegarde y sera enregistrée directement. Le navigateur peut redemander l'autorisation : accepte." : "Ce navigateur ne permet pas de choisir un dossier : la sauvegarde va dans « Téléchargements ».";
+  $("fs-aide").textContent = fsDispo() ? "Choisis une fois le dossier (par exemple « MALISTE JSON ») : chaque sauvegarde y sera enregistrée directement. Le navigateur peut redemander l'autorisation : accepte." : "Ce navigateur ne permet pas de choisir un dossier : la sauvegarde va dans « Téléchargements ».";
   fsGet().then((h) => { $("fs-nom").textContent = h ? "« " + h.name + " »" : "aucun (le fichier va dans « Téléchargements »)"; $("fs-oublier").hidden = !h; });
 }
 let SAUV_EN_COURS = false;
 async function sauvegarderMaintenant(afficher) {
   if (SAUV_EN_COURS) return; SAUV_EN_COURS = true; $("sauv-go").disabled = true; $("btn-sauv").disabled = true;
   afficher("Sauvegarde en cours…");
-  try { const dos = await preparerDossier(), r = await sauvegarder(dos, "COURSES_sauvegarde_"); afficher("Sauvegarde enregistrée : " + r.nom + " → " + r.ou + ". " + compter(r.obj) + "."); }
+  try { const dos = await preparerDossier(), r = await sauvegarder(dos, "MALISTE_sauvegarde_"); afficher("Sauvegarde enregistrée : " + r.nom + " → " + r.ou + ". " + compter(r.obj) + "."); }
   catch (e) { afficher("Sauvegarde impossible : " + e.message + ".", true); }
   SAUV_EN_COURS = false; $("sauv-go").disabled = false; $("btn-sauv").disabled = false;
   if (VUE && VUE.type === "sauvegarde") rendreSauvegarde();
@@ -999,7 +999,7 @@ $("fs-oublier").addEventListener("click", () => { fsSet(null).then(() => { msgSa
 const idOk = (x) => typeof x === "string" && x.length > 0 && x.length <= 700 && !x.includes("/") && x !== "." && x !== ".." && !/^__.*__$/.test(x);
 const objet = (x) => !!x && typeof x === "object" && !Array.isArray(x);
 function validerSauvegarde(o) {
-  if (!objet(o) || o.application !== "COURSES" || !Array.isArray(o.groupes)) throw new Error("ce fichier n'est pas une sauvegarde COURSES");
+  if (!objet(o) || !["MALISTE", "COURSES"].includes(o.application) || !Array.isArray(o.groupes)) throw new Error("ce fichier n'est pas une sauvegarde Maliste");
   const vus = new Set();
   o.groupes.forEach((g) => {
     if (!objet(g) || !idOk(g.id) || !objet(g.data) || vus.has(g.id)) throw new Error("liste ou note mal formée dans le fichier");
@@ -1039,7 +1039,7 @@ $("rest-oui").addEventListener("click", async () => {
   const btn = $("rest-choisir"); btn.disabled = true;
   try {
     msgSauv("Sauvegarde de l'état actuel…");
-    const avant = await sauvegarder(await preparerDossier(), "COURSES_avant_restauration_");
+    const avant = await sauvegarder(await preparerDossier(), "MALISTE_avant_restauration_");
     msgSauv("Restauration en cours…");
     const nouv = ecritures(o), garder = new Set(nouv.map(([r]) => r.path));
     const ops = ecritures(avant.obj).filter(([r]) => !garder.has(r.path)).map(([r]) => [r, null]).concat(nouv);
@@ -1051,7 +1051,7 @@ $("rest-oui").addEventListener("click", async () => {
     remettreAZero();   // les données sont maintenant celles du fichier
     msgSauv("Sauvegarde restaurée : " + compter(o) + ". L'état d'avant est dans " + avant.nom + " (" + avant.ou + ").");
     rendreSauvegarde(); rendreTiroir();
-  } catch (e) { msgSauv("Restauration interrompue : " + e.message + ". Si une partie a été remplacée, restaure le fichier « COURSES_avant_restauration_… ».", true); }
+  } catch (e) { msgSauv("Restauration interrompue : " + e.message + ". Si une partie a été remplacée, restaure le fichier « MALISTE_avant_restauration_… ».", true); }
   btn.disabled = false;
 });
 

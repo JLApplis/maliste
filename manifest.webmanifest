@@ -1,6 +1,6 @@
 {
-  "name": "Courses",
-  "short_name": "Courses",
+  "name": "Maliste",
+  "short_name": "Maliste",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

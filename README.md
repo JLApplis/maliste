@@ -1,8 +1,8 @@
-# 🛒 Courses
+# 🛒 Maliste
 
 **Liste de courses personnelle** : cases à cocher, suppression d'un geste, suggestions à partir des articles déjà achetés. Synchronisée entre le téléphone et l'ordinateur.
 
-**[▶️ Ouvrir l'appli](https://jlapplis.github.io/courses/)**
+**[▶️ Ouvrir l'appli](https://jlapplis.github.io/maliste/)**
 
 ![Licence](https://img.shields.io/badge/licence-GPL_v3-blue)
 
